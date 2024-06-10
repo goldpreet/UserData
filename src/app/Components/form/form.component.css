@@ -1,0 +1,73 @@
+.main-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.heading
+{
+    text-align: center;
+    font-size: 40px;
+    color: rgb(158, 9, 9);
+}
+.form-container {
+    margin: 20px;
+    width: 600px;
+    background-color: #f9f9f9;
+    padding: 18px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+  input:focus, select:focus {
+    outline: none;
+    border-color: #225a96;
+    box-shadow: 0 0 5px rgba(34, 90, 150, 0.5);
+  }
+  
+  button {
+    padding: 10px 15px;
+    background-color: #225a96;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover:not(:disabled) {
+    background-color: #1b4d7a;
+  }
+  
+  button:disabled {
+    background-color: #ccc7c7;
+    cursor: not-allowed;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 0.875em;
+    margin-top: 5px;
+  }
+  
