@@ -23,9 +23,28 @@ export class FormComponent {
       gender: ['', Validators.required],
       age: ['', [Validators.required, Validators.min(1), Validators.max(120)]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      salary: ['', [Validators.required, Validators.min(0)]]
+      salary: ['', [Validators.required, Validators.min(0)]],
+      qualification: ['', Validators.required],
+      experience: ['', [Validators.required, Validators.min(0)]],
+      institution: ['', Validators.required]
     });
   }
+
+  areInitialFieldsValid(): boolean {
+    const initialFields = ['id', 'name', 'email', 'status', 'gender', 'age', 'phone', 'salary'];
+    return initialFields.every(field => this.userForm.get(field)?.valid);
+  }
+
+  
+
+  isQualificationVisible= false
+
+  toggleQualificationFields(){
+    if(this.areInitialFieldsValid()){
+      this.isQualificationVisible=!this.isQualificationVisible
+    }
+  }
+
   onSubmit() {
     if (this.userForm.valid) {
       console.log(this.userForm.value);
