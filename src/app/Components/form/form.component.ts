@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserService } from '../../Services/user.service';
 
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [ FormsModule,
+  imports: [FormsModule,
     ReactiveFormsModule, CommonModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
@@ -16,7 +17,7 @@ export class FormComponent {
 
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
-      id: ['', Validators.required],
+      // id: ['', Validators.required],
       name: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
       status: ['', Validators.required],
@@ -31,23 +32,30 @@ export class FormComponent {
   }
 
   areInitialFieldsValid(): boolean {
-    const initialFields = ['id', 'name', 'email', 'status', 'gender', 'age', 'phone', 'salary'];
+    const initialFields = ['name', 'email', 'status', 'gender', 'age', 'phone', 'salary'];
     return initialFields.every(field => this.userForm.get(field)?.valid);
   }
 
-  
 
-  isQualificationVisible= false
 
-  toggleQualificationFields(){
-    if(this.areInitialFieldsValid()){
-      this.isQualificationVisible=!this.isQualificationVisible
+  isQualificationVisible = false
+
+  toggleQualificationFields() {
+    if (this.areInitialFieldsValid()) {
+      this.isQualificationVisible = !this.isQualificationVisible
     }
   }
 
+
+
+  
+  userService = inject(UserService)
   onSubmit() {
     if (this.userForm.valid) {
       console.log(this.userForm.value);
+      this.userService.addUserDetails(this.userForm.value).subscribe(() => {
+        alert("data submitted");
+      })
     } else {
       console.log('Form is invalid');
     }

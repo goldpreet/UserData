@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,4 +7,10 @@ import { Injectable } from '@angular/core';
 export class UserService {
 
   constructor() { }
+
+  httpClient = inject(HttpClient)
+  addUserDetails(payload: any) 
+  {
+    return this.httpClient.post(`https://localhost:7071/api/Employee`, payload)
+  }
 }

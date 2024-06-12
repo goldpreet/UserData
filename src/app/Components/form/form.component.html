@@ -2,10 +2,7 @@
   <div class="form-container">
     <h1 class="heading">Form Data</h1>
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="id">Id</label>
-        <input id="id" formControlName="id" type="text" />
-      </div>
+     
       <div class="form-group">
         <label for="name">Name</label>
         <input id="name" formControlName="name" type="text" />
@@ -33,7 +30,7 @@
       </div>
       <div class="form-group">
         <label for="phone">Phone</label>
-        <input id="phone" formControlName="phone" type="text" />
+        <input id="phone" formControlName="phone" type="number" />
       </div>
       <div class="form-group">
         <label for="salary">Salary</label>
@@ -77,7 +74,7 @@
           />
         </div>
       </div>
-      <!-- <button >Submit</button> -->
+      
       <button type="submit" *ngIf="!userForm.invalid">Submit</button>
     </form>
   </div>
