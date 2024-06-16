@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../Services/user.service';
 
 
@@ -25,9 +25,7 @@ export class FormComponent {
       age: ['', [Validators.required, Validators.min(1), Validators.max(120)]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       salary: ['', [Validators.required, Validators.min(0)]],
-      qualification: ['', Validators.required],
-      experience: ['', [Validators.required, Validators.min(0)]],
-      institution: ['', Validators.required]
+      qualifications: this.fb.array([])
     });
   }
 
@@ -42,13 +40,35 @@ export class FormComponent {
 
   toggleQualificationFields() {
     if (this.areInitialFieldsValid()) {
-      this.isQualificationVisible = !this.isQualificationVisible
+      this.isQualificationVisible = !this.isQualificationVisible;
+      if (this.isQualificationVisible && this.qualifications.length === 0) {
+        this.addQualification();
+      }
     }
   }
 
+  get qualifications(): FormArray {
+    return this.userForm.get('qualifications') as FormArray;
+  }
+
+  addQualification() {
+    const qualificationGroup = this.fb.group({
+      qualification: ['', Validators.required],
+      experience: ['', [Validators.required, Validators.min(0)]],
+      institution: ['', Validators.required]
+    });
+    this.qualifications.push(qualificationGroup);
+  }
+
+  removeQualification(index: number) {
+    this.qualifications.removeAt(index);
+  }
+
+  isFormValid(): boolean {
+    return this.areInitialFieldsValid() && this.qualifications.length > 0;
+  }
 
 
-  
   userService = inject(UserService)
   onSubmit() {
     if (this.userForm.valid) {

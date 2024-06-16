@@ -2,7 +2,6 @@
   <div class="form-container">
     <h1 class="heading">Form Data</h1>
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-     
       <div class="form-group">
         <label for="name">Name</label>
         <input id="name" formControlName="name" type="text" />
@@ -45,37 +44,40 @@
         Add Qualification
       </button>
       <div *ngIf="isQualificationVisible">
-        <div class="form-group">
-          <label for="qualification">Qualification</label>
-          <input
-            id="qualification"
-            formControlName="qualification"
-            type="text"
-            placeholder="Enter Qualification"
-          />
+        <div *ngFor="let qualification of qualifications.controls; let i = index" [formGroupName]="i" class="qualification-row">
+          <div class="form-group">
+            <label for="qualification">Qualification</label>
+            <input
+              id="qualification"
+              formControlName="qualification"
+              type="text"
+              placeholder="Enter Qualification"
+            />
+          </div>
+          <div class="form-group">
+            <label for="experience">Experience (in years)</label>
+            <input
+              id="experience"
+              formControlName="experience"
+              type="number"
+              placeholder="Enter Experience"
+              min="0"
+            />
+          </div>
+          <div class="form-group">
+            <label for="institution">Institution</label>
+            <input
+              id="institution"
+              formControlName="institution"
+              type="text"
+              placeholder="Enter Institution"
+            />
+          </div>
+          <button type="button" (click)="removeQualification(i)">Remove</button>
         </div>
-        <div class="form-group">
-          <label for="experience">Experience (in years)</label>
-          <input
-            id="experience"
-            formControlName="experience"
-            type="number"
-            placeholder="Enter Experience"
-            min="0"
-          />
-        </div>
-        <div class="form-group">
-          <label for="institution">Institution</label>
-          <input
-            id="institution"
-            formControlName="institution"
-            type="text"
-            placeholder="Enter Institution"
-          />
-        </div>
+        <button style="float: right;" type="button" (click)="addQualification()">Add Another Qualification</button>
       </div>
-      
-      <button type="submit" *ngIf="!userForm.invalid">Submit</button>
+      <button style="margin-top: 16px;" type="submit" *ngIf="isFormValid()">Submit</button>
     </form>
   </div>
 </div>
