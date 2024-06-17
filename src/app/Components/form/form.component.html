@@ -29,7 +29,7 @@
       </div>
       <div class="form-group">
         <label for="phone">Phone</label>
-        <input id="phone" formControlName="phone" type="number" />
+        <input id="phone" formControlName="phone" type="textg" />
       </div>
       <div class="form-group">
         <label for="salary">Salary</label>
@@ -44,18 +44,22 @@
         Add Qualification
       </button>
       <div *ngIf="isQualificationVisible">
-        <div *ngFor="let qualification of qualifications.controls; let i = index" [formGroupName]="i" class="qualification-row">
+        <div
+        class="qualification-row"
+          *ngFor="let qualification of qualifications.controls; let i = index"
+          [formGroup]="getQualificationFormGroup(i)"
+        >
           <div class="form-group">
-            <label for="qualification">Qualification</label>
+            <label *ngIf="i==0" for="qualificationName">Qualification</label>
             <input
-              id="qualification"
-              formControlName="qualification"
+              id="qualificationName"
+              formControlName="qualificationName"
               type="text"
               placeholder="Enter Qualification"
             />
           </div>
           <div class="form-group">
-            <label for="experience">Experience (in years)</label>
+            <label *ngIf="i==0" for="experience">Experience (in years)</label>
             <input
               id="experience"
               formControlName="experience"
@@ -65,7 +69,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="institution">Institution</label>
+            <label *ngIf="i==0" for="institution">Institution</label>
             <input
               id="institution"
               formControlName="institution"
@@ -73,11 +77,15 @@
               placeholder="Enter Institution"
             />
           </div>
-          <button type="button" (click)="removeQualification(i)">Remove</button>
+          <button [style.margin-top.px]="i === 0 ? 10 : -10" type="button" (click)="removeQualification(i)">Remove</button>
         </div>
-        <button style="float: right;" type="button" (click)="addQualification()">Add Another Qualification</button>
+        <button [disabled]="!isAboveQualificationFilled()" style="float: right" type="button" (click)="addQualification()">
+          Add Another Qualification
+        </button>
       </div>
-      <button style="margin-top: 16px;" type="submit" *ngIf="isFormValid()">Submit</button>
+      <button [disabled]="!isAboveQualificationFilled()"  style="margin-top: 16px" type="submit" *ngIf="isFormValid()" >
+        Submit
+      </button>
     </form>
   </div>
 </div>

@@ -1,16 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { UserService } from '../../Services/user.service';
-
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [FormsModule,
-    ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './form.component.html',
-  styleUrl: './form.component.css'
+  styleUrl: './form.component.css',
 })
 export class FormComponent {
   userForm: FormGroup;
@@ -25,18 +30,24 @@ export class FormComponent {
       age: ['', [Validators.required, Validators.min(1), Validators.max(120)]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       salary: ['', [Validators.required, Validators.min(0)]],
-      qualifications: this.fb.array([])
+      qualifications: this.fb.array([]),
     });
   }
 
   areInitialFieldsValid(): boolean {
-    const initialFields = ['name', 'email', 'status', 'gender', 'age', 'phone', 'salary'];
-    return initialFields.every(field => this.userForm.get(field)?.valid);
+    const initialFields = [
+      'name',
+      'email',
+      'status',
+      'gender',
+      'age',
+      'phone',
+      'salary',
+    ];
+    return initialFields.every((field) => this.userForm.get(field)?.valid);
   }
 
-
-
-  isQualificationVisible = false
+  isQualificationVisible = false;
 
   toggleQualificationFields() {
     if (this.areInitialFieldsValid()) {
@@ -51,13 +62,35 @@ export class FormComponent {
     return this.userForm.get('qualifications') as FormArray;
   }
 
+  getQualificationFormGroup(index: number): FormGroup {
+    return this.qualifications.controls[index] as FormGroup;
+  }
+
   addQualification() {
-    const qualificationGroup = this.fb.group({
-      qualification: ['', Validators.required],
-      experience: ['', [Validators.required, Validators.min(0)]],
-      institution: ['', Validators.required]
-    });
-    this.qualifications.push(qualificationGroup);
+    const areAllQualificationsValid = this.qualifications.controls.every(
+      (control) => control.valid
+    );
+
+    if (areAllQualificationsValid) {
+      const qualificationGroup = this.fb.group({
+        qualificationName: ['', Validators.required],
+        experience: ['', [Validators.required, Validators.min(0)]],
+        institution: ['', Validators.required],
+      });
+      this.qualifications.push(qualificationGroup);
+    } else {
+      console.log(
+        'Please fill all the previous qualifications before adding a new one.'
+      );
+    }
+  }
+
+  isAboveQualificationFilled() {
+    const areAllQualificationsValid = this.qualifications.controls.every(
+      (control) => control.valid
+    );
+
+    return areAllQualificationsValid;
   }
 
   removeQualification(index: number) {
@@ -68,30 +101,11 @@ export class FormComponent {
     return this.areInitialFieldsValid() && this.qualifications.length > 0;
   }
 
-
-  userService = inject(UserService)
+  userService = inject(UserService);
   onSubmit() {
-    if (this.userForm.valid) {
-      console.log(this.userForm.value);
-      this.userService.addUserDetails(this.userForm.value).subscribe(() => {
-        alert("data submitted");
-      })
-    } else {
-      console.log('Form is invalid');
-    }
+    console.log(this.userForm.value);
+    this.userService.addUserDetails(this.userForm.value).subscribe(() => {
+      alert('data submitted');
+    });
   }
 }
-//   onReset() {
-//     this.userForm.reset();
-//   }
-
-//   // Helper methods to access form controls
-//   get id() { return this.userForm.get('id')!; }
-//   get name() { return this.userForm.get('name')!; }
-//   get status() { return this.userForm.get('status')!; }
-//   get gender() { return this.userForm.get('gender')!; }
-//   get age() { return this.userForm.get('age')!; }
-//   get phone() { return this.userForm.get('phone')!; }
-//   get salary() { return this.userForm.get('salary')!; }
-// }
-

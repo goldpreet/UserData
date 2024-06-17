@@ -19,7 +19,7 @@
           <td>{{user.id}}</td>
           <td>{{user.name}}</td>
           <td>{{user.status}}</td>
-          <td><button class="bton">Edit</button> <button class="bton">Delete</button></td>
+          <td><button  (click)="editUser(user)" class="bton" >Edit</button> <button class="bton"(click)="deleteUser(user)">Delete</button></td>
         </tr>
       </tbody>
     </table>
@@ -27,3 +27,4 @@
 
   </div>
   
+ 
