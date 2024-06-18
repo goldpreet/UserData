@@ -5,14 +5,18 @@
       <div class="form-group">
         <label for="name">Name</label>
         <input id="name" formControlName="name" type="text" />
+        <span *ngIf="hasError('name', 'required')" class="error-message">Name is required</span>
       </div>
       <div class="form-group">
         <label for="status">Status</label>
         <input id="status" formControlName="status" type="text" />
+        <span *ngIf="hasError('status', 'required')" class="error-message">Status is required</span>
       </div>
       <div class="form-group">
         <label for="email">Email</label>
         <input id="email" formControlName="email" type="email" />
+        <span *ngIf="hasError('email', 'required')" class="error-message">Email is required</span>
+        <span *ngIf="hasError('email', 'email')" class="error-message">Invalid email format</span>
       </div>
       <div class="form-group">
         <label for="gender">Gender</label>
@@ -22,18 +26,22 @@
           <option value="female">Female</option>
           <option value="other">Other</option>
         </select>
+        <span *ngIf="hasError('gender', 'required')" class="error-message">Gender is required</span>
       </div>
       <div class="form-group">
         <label for="age">Age</label>
         <input id="age" formControlName="age" type="number" />
+        <span *ngIf="hasError('age', 'required')" class="error-message">Age is required</span>
       </div>
       <div class="form-group">
         <label for="phone">Phone</label>
-        <input id="phone" formControlName="phone" type="textg" />
+        <input id="phone" formControlName="phone" type="text" />
+        <span *ngIf="hasError('phone', 'required')" class="error-message">Phone is required</span>
       </div>
       <div class="form-group">
         <label for="salary">Salary</label>
         <input id="salary" formControlName="salary" type="number" min="0" />
+        <span *ngIf="hasError('salary', 'required')" class="error-message">Salary is required</span>
       </div>
       <button
         type="button"
@@ -45,7 +53,7 @@
       </button>
       <div *ngIf="isQualificationVisible">
         <div
-        class="qualification-row"
+          class="qualification-row"
           *ngFor="let qualification of qualifications.controls; let i = index"
           [formGroup]="getQualificationFormGroup(i)"
         >
@@ -57,6 +65,11 @@
               type="text"
               placeholder="Enter Qualification"
             />
+            <span
+            *ngIf="qualification.get('qualificationName')?.errors?.['required']"
+            class="error-message"
+            >Qualification is required</span
+          >
           </div>
           <div class="form-group">
             <label *ngIf="i==0" for="experience">Experience (in years)</label>
@@ -67,6 +80,11 @@
               placeholder="Enter Experience"
               min="0"
             />
+            <span
+            *ngIf="qualification.get('experience')?.errors?.['required']"
+            class="error-message"
+            >experience is required</span
+          >
           </div>
           <div class="form-group">
             <label *ngIf="i==0" for="institution">Institution</label>
@@ -76,6 +94,11 @@
               type="text"
               placeholder="Enter Institution"
             />
+            <span
+            *ngIf="qualification.get('institution')?.errors?.['required']"
+            class="error-message"
+            >institution is required</span
+          >
           </div>
           <button [style.margin-top.px]="i === 0 ? 10 : -10" type="button" (click)="removeQualification(i)">Remove</button>
         </div>

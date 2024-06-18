@@ -93,6 +93,11 @@ export class FormComponent {
     return areAllQualificationsValid;
   }
 
+  hasError(controlName: string, errorCode: string): boolean {
+    const control = this.userForm.get(controlName);
+    return control?.invalid && control?.errors?.[errorCode];
+  }
+
   removeQualification(index: number) {
     this.qualifications.removeAt(index);
   }
