@@ -10,16 +10,21 @@
           <th>ID</th>
           <th>Name</th>
           <th>Status</th>
-          <th>Action</th>
+          <th>Email</th>
+          <th>Phone</th>
 
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{user.id}}</td>
+        <tr  [routerLink]="['/display-details', user.guidId]" click *ngFor="let user of userdata">
+        
+          <td>{{user.$id}}</td>
           <td>{{user.name}}</td>
           <td>{{user.status}}</td>
-          <td><button  (click)="editUser(user)" class="bton" >Edit</button> <button class="bton"(click)="deleteUser(user)">Delete</button></td>
+          <td>{{user.email}}</td>
+          <td>{{user.phone}}</td>
+        
+         
         </tr>
       </tbody>
     </table>

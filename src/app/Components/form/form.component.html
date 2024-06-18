@@ -43,70 +43,41 @@
         <input id="salary" formControlName="salary" type="number" min="0" />
         <span *ngIf="hasError('salary', 'required')" class="error-message">Salary is required</span>
       </div>
-      <button
-        type="button"
-        *ngIf="!isQualificationVisible"
-        [disabled]="!areInitialFieldsValid()"
-        (click)="toggleQualificationFields()"
-      >
+      <button type="button" *ngIf="!isQualificationVisible" [disabled]="!areInitialFieldsValid()"
+        (click)="toggleQualificationFields()">
         Add Qualification
       </button>
       <div *ngIf="isQualificationVisible">
-        <div
-          class="qualification-row"
-          *ngFor="let qualification of qualifications.controls; let i = index"
-          [formGroup]="getQualificationFormGroup(i)"
-        >
+        <div class="qualification-row" *ngFor="let qualification of qualifications.controls; let i = index"
+          [formGroup]="getQualificationFormGroup(i)">
           <div class="form-group">
             <label *ngIf="i==0" for="qualificationName">Qualification</label>
-            <input
-              id="qualificationName"
-              formControlName="qualificationName"
-              type="text"
-              placeholder="Enter Qualification"
-            />
-            <span
-            *ngIf="qualification.get('qualificationName')?.errors?.['required']"
-            class="error-message"
-            >Qualification is required</span
-          >
+            <input id="qualificationName" formControlName="qualificationName" type="text"
+              placeholder="Enter Qualification" />
+            <span *ngIf="qualification.get('qualificationName')?.errors?.['required']"
+              class="error-message">Qualification is required</span>
           </div>
           <div class="form-group">
-            <label *ngIf="i==0" for="experience">Experience (in years)</label>
-            <input
-              id="experience"
-              formControlName="experience"
-              type="number"
-              placeholder="Enter Experience"
-              min="0"
-            />
-            <span
-            *ngIf="qualification.get('experience')?.errors?.['required']"
-            class="error-message"
-            >experience is required</span
-          >
+            <label *ngIf="i==0" for="experience">Experience</label>
+            <input id="experience" formControlName="experience" type="number" placeholder="Enter Experience" min="0" />
+            <span *ngIf="qualification.get('experience')?.errors?.['required']" class="error-message">experience is
+              required</span>
           </div>
           <div class="form-group">
             <label *ngIf="i==0" for="institution">Institution</label>
-            <input
-              id="institution"
-              formControlName="institution"
-              type="text"
-              placeholder="Enter Institution"
-            />
-            <span
-            *ngIf="qualification.get('institution')?.errors?.['required']"
-            class="error-message"
-            >institution is required</span
-          >
+            <input id="institution" formControlName="institution" type="text" placeholder="Enter Institution" />
+            <span *ngIf="qualification.get('institution')?.errors?.['required']" class="error-message">institution is
+              required</span>
           </div>
-          <button [style.margin-top.px]="i === 0 ? 10 : -10" type="button" (click)="removeQualification(i)">Remove</button>
+          <button [style.margin-top.px]="i === 0 ? 10 : -10" type="button"
+            (click)="removeQualification(i)">Remove</button>
         </div>
-        <button [disabled]="!isAboveQualificationFilled()" style="float: right" type="button" (click)="addQualification()">
+        <button [disabled]="!isAboveQualificationFilled()" style="float: right" type="button"
+          (click)="addQualification()">
           Add Another Qualification
         </button>
       </div>
-      <button [disabled]="!isAboveQualificationFilled()"  style="margin-top: 16px" type="submit" *ngIf="isFormValid()" >
+      <button [disabled]="!isAboveQualificationFilled()" style="margin-top: 16px" type="submit" *ngIf="isFormValid()">
         Submit
       </button>
     </form>

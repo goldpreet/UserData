@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { UserService } from '../../Services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -105,12 +106,13 @@ export class FormComponent {
   isFormValid(): boolean {
     return this.areInitialFieldsValid() && this.qualifications.length > 0;
   }
-
+route =inject(Router)
   userService = inject(UserService);
   onSubmit() {
     console.log(this.userForm.value);
     this.userService.addUserDetails(this.userForm.value).subscribe(() => {
       alert('data submitted');
+      this.route.navigateByUrl('/user')
     });
   }
 }

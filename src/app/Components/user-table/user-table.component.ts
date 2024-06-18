@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { Router} from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterModule} from '@angular/router';
+import { UserService } from '../../Services/user.service';
 
 interface User {
   id: number;
@@ -11,7 +12,7 @@ interface User {
 @Component({
   selector: 'app-user-table',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.css']
 })
@@ -56,6 +57,17 @@ export class UserTableComponent {
   addData() {
     this.router.navigateByUrl("/create-form");
   }
+
+  userService =inject(UserService)
+userdata :any=[]
+  ngOnInit()
+  {
+    this.userService.getUserDetails().subscribe((data:any)=>{
+      console.log(data.$values,"data users");
+      this.userdata=data.$values
+    })
+  }
+
 }
 
 
