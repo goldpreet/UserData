@@ -2,9 +2,10 @@
     margin: 20px auto;
     max-width: 800px;
     padding: 20px;
-    border: 1px solid #e0e0e0;
+    /* border: 1px solid #e0e0e0; */
     border-radius: 8px;
-    background-color: #f9f9f9;
+    /* background-color: #f9f9f9; */
+    background-image: linear-gradient( rgba(143, 129, 194, 0.781), rgba(206, 92, 136, 0.877));
 }
 
 .text-center {
@@ -13,6 +14,7 @@
 
 .mb-4 {
     margin-bottom: 1.5rem;
+
 }
 
 .row {
@@ -31,6 +33,8 @@
 
 .mb-3 {
     margin-bottom: 1rem;
+    /* background-image: linear-gradient( rgba(143, 129, 194, 0.781), rgba(206, 92, 136, 0.877)); */
+
 }
 
 .table {

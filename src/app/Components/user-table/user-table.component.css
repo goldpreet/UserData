@@ -30,6 +30,8 @@
 .table-container {
     margin: 20px;
     overflow-x: auto;
+    background-image: linear-gradient( rgba(212, 171, 187, 0.877) ,  rgba(176, 162, 224, 0.781));
+
   }
   
   table {
@@ -39,7 +41,7 @@
   
   th, td {
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #f0eded;
     text-align: center;
     font-size: 19px;
   }

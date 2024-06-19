@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+ 
 
 }
 
@@ -25,6 +26,8 @@
     padding: 18px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* background-color: #df2b2b; */
+    background-image: linear-gradient( rgba(143, 129, 194, 0.781), rgba(206, 92, 136, 0.877));
   }
 
   .form-group {
@@ -84,7 +87,7 @@
 
   .error-message {
     color: red;
-    font-size: 0.875em;
+    font-size: 1.1em;
     margin-top: 5px;
   }
 
