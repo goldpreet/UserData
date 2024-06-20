@@ -94,25 +94,36 @@ export class FormComponent {
     return areAllQualificationsValid;
   }
 
+  // validating whether the data of qualification is filled 
+  // then only one more row can be added and the add more qualification button gets to appear
+
   hasError(controlName: string, errorCode: string): boolean {
     const control = this.userForm.get(controlName);
     return control?.invalid && control?.errors?.[errorCode];
   }
 
+
   removeQualification(index: number) {
     this.qualifications.removeAt(index);
   }
 
+  // remove the data entered in qualification
+
   isFormValid(): boolean {
     return this.areInitialFieldsValid() && this.qualifications.length > 0;
   }
+  // submit button is validating that if  
+  // data of qualification details filled then only submit button will appear
 route =inject(Router)
   userService = inject(UserService);
   onSubmit() {
     console.log(this.userForm.value);
+// user data coming from backend
     this.userService.addUserDetails(this.userForm.value).subscribe(() => {
       alert('data submitted');
-      this.route.navigateByUrl('/user')
+      // alert msg will be shown 
+      this.route.navigateByUrl('/user') 
+      // after data is added in frorm it will be redirected to user table
     });
   }
 }

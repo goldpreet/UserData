@@ -66,6 +66,7 @@ userdata :any=[]
       console.log(data.$values,"data users");
       this.userdata=data.$values
     })
+    // getting data from backend part 
   }
 
 }

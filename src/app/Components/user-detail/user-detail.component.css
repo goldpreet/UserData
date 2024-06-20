@@ -33,6 +33,9 @@
 
 .mb-3 {
     margin-bottom: 1rem;
+    color: rgb(206, 24, 69);
+    font-size: 30px;
+    text-decoration: underline;
     /* background-image: linear-gradient( rgba(143, 129, 194, 0.781), rgba(206, 92, 136, 0.877)); */
 
 }

@@ -14,10 +14,18 @@ export class UserService {
   {
     return this.httpClient.post(`https://localhost:7071/api/Employee`, payload)
   }
+
+// add  data of user
+
   getUserDetails(){
     return this.httpClient.get("https://localhost:7071/api/Employee")
   }
+
+// get all data of users
+
   getUserByid(param:any){
     return this.httpClient.get(`https://localhost:7071/api/Employee/${param}`)
   }
 }
+
+// get specific data of user

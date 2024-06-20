@@ -18,7 +18,9 @@
       <tbody>
         <tr  [routerLink]="['/display-details', user.guidId]" click *ngFor="let user of userdata">
         
-       
+       <!-- displaying data of a specified user 
+        as per the required guidId which user is select from user table -->
+
           <td>{{user.name}}</td>
           <td>{{user.status}}</td>
           <td>{{user.email}}</td>

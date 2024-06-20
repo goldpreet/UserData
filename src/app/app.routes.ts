@@ -6,8 +6,12 @@ import { UserDetailComponent } from './Components/user-detail/user-detail.compon
 
 export const routes: Routes = [
     {path: ''  , component: UserTableComponent},
+    // by defaullt user page is opened whwn no url is specified
     {path: 'user'  , component: UserTableComponent},
+    // user page
     {path: 'create-form', component: FormComponent },
+    // create form page 
     {path: 'display-details/:id', component: UserDetailComponent}
+    // through url with guid id the specific data is displayed
  
 ];

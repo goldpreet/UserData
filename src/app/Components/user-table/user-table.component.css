@@ -13,13 +13,13 @@
 .bton:hover {
     background-color: #c1aaaaaa;
     transform: scale(1.3);
-    color: rgb(255, 255, 255);
+    color: rgb(202, 80, 80);
   }
   
 .btn 
 {
     padding: 15px 20px;
-    background-color: rgb(215, 164, 164);
+    background-color: rgb(138, 23, 23);
     font-size: 18px;
     color: white;
     border: 0px solid white;
