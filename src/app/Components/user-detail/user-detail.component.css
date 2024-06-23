@@ -2,9 +2,7 @@
     margin: 20px auto;
     max-width: 800px;
     padding: 20px;
-    /* border: 1px solid #e0e0e0; */
     border-radius: 8px;
-    /* background-color: #f9f9f9; */
     background-image: linear-gradient( rgba(143, 129, 194, 0.781), rgba(206, 92, 136, 0.877));
 }
 
@@ -36,7 +34,6 @@
     color: rgb(206, 24, 69);
     font-size: 30px;
     text-decoration: underline;
-    /* background-image: linear-gradient( rgba(143, 129, 194, 0.781), rgba(206, 92, 136, 0.877)); */
 
 }
 
@@ -81,4 +78,32 @@ p {
     font-size: 1rem;
     color: #6c757d;
     margin-top: 1rem;
+}
+
+.addQ
+{
+    padding: 15px 20px;
+    background-color: rgb(138, 23, 23);
+    font-size: 18px;
+    color: white;
+    border: 0px solid white;
+    margin-left: 30px;
+    margin-top: 14px;
+    border-radius: 12px;
+
+
+}
+
+.add
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+input{
+    padding: 8px 10px;
+    border-radius: 8px;
 }

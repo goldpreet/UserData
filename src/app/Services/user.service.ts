@@ -9,22 +9,28 @@ export class UserService {
   constructor() { }
 
   httpClient = inject(HttpClient)
-  
-  addUserDetails(payload: any) 
-  {
+
+  addUserDetails(payload: any) {
     return this.httpClient.post(`https://localhost:7071/api/Employee`, payload)
   }
 
-// add  data of user
+  // add  data of user
 
-  getUserDetails(){
+  getUserDetails() {
     return this.httpClient.get("https://localhost:7071/api/Employee")
   }
 
-// get all data of users
+  // get all data of users
 
-  getUserByid(param:any){
+  getUserByid(param: any) {
     return this.httpClient.get(`https://localhost:7071/api/Employee/${param}`)
+  }
+
+
+  updateUserData(payload: any) {
+    console.log(payload, "payload");
+
+    return this.httpClient.put(`https://localhost:7071/api/Employee/${payload.guidId}`, payload)
   }
 }
 

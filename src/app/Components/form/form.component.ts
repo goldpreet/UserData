@@ -59,13 +59,16 @@ export class FormComponent {
     }
   }
 
+  // show add qualification button only when the personal details are fully validated 
+  // and completed  otherwise the button is disabled
+
   get qualifications(): FormArray {
     return this.userForm.get('qualifications') as FormArray;
   }
 
   getQualificationFormGroup(index: number): FormGroup {
     return this.qualifications.controls[index] as FormGroup;
-  }
+  }   
 
   addQualification() {
     const areAllQualificationsValid = this.qualifications.controls.every(
@@ -85,6 +88,7 @@ export class FormComponent {
       );
     }
   }
+// add more qualification only if the minimum all qualification row data is filled
 
   isAboveQualificationFilled() {
     const areAllQualificationsValid = this.qualifications.controls.every(
