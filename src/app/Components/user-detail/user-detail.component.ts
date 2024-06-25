@@ -9,32 +9,30 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './user-detail.component.html',
-  styleUrl: './user-detail.component.css'
+  styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent {
   userDetails: any = {}
   constructor(private route: ActivatedRoute) { }
   userService = inject(UserService)
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const guidId = params.get('id');
-
-      console.log('Received guidId:', guidId);
-      this.userService.getUserByid(guidId).subscribe((data) => {
-        console.log(data, "data");
-        this.userDetails = data
-        // Use the guidId to fetch user details from the backend
-      })
-
-    });
-
-  }
+  
   showQualificationInputs: boolean = false;
   newQualification: any = {
     qualificationName: '',
     experience: null,
     institution: ''
   };
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const guidId = params.get('id');
+      console.log('Received guidId:', guidId);
+      this.userService.getUserByid(guidId).subscribe((data) => {
+        console.log(data, "data");
+        this.userDetails = data;
+      });
+    });
+  }
 
   toggleAddQualification() {
     this.showQualificationInputs = true;
@@ -50,7 +48,6 @@ export class UserDetailComponent {
       }
 
       const newQualificationEntry = {
-        // Generate a new GUID for the qualification
         qualificationName: this.newQualification.qualificationName,
         experience: this.newQualification.experience,
         institution: this.newQualification.institution
@@ -83,9 +80,8 @@ export class UserDetailComponent {
 
       console.log(this.newQualification, "new");
       this.userService.updateUserData(payload).subscribe(() => {
-        console.log("upadted");
-
-      })
+        console.log("Updated successfully");
+      });
 
       // Reset the form
       this.newQualification = {
@@ -99,6 +95,13 @@ export class UserDetailComponent {
       alert('Please fill all fields');
     }
   }
+
+  cancelAddQualification() {
+    this.newQualification = {
+      qualificationName: '',
+      experience: null,
+      institution: ''
+    };
+    this.showQualificationInputs = false;
+  }
 }
-
-

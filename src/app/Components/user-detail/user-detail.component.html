@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="text-center mb-4 mb-3">User Details</h2>
+  <h2 class="text-center mb-4">User Details</h2>
   <div class="row">
     <div class="col-md-6">
       <h4 class="mb-3">Personal Information</h4>
@@ -42,16 +42,13 @@
       <div class="add">
         <h4 class="mb-3">Qualifications</h4>
 
-        <button class="addQ" (click)="toggleAddQualification()" *ngIf="!showQualificationInputs">
+        <button class="btn btn-primary addQ" (click)="toggleAddQualification()" *ngIf="!showQualificationInputs">
           Add Qualification
         </button>
       </div>
 
-
-
       <div class="table">
-        <table class="table table-bordered"
-          *ngIf="userDetails.qualifications && userDetails.qualifications.$values.length > 0">
+        <table class="table table-bordered" *ngIf="userDetails.qualifications && userDetails.qualifications.$values.length > 0">
           <thead>
             <tr>
               <th>Qualification Name</th>
@@ -65,62 +62,27 @@
               <td>{{ qualification.qualificationName }}</td>
               <td>{{ qualification.experience }} years</td>
               <td>{{ qualification.institution }}</td>
-             
             </tr>
 
             <!-- New qualification input row -->
             <tr *ngIf="showQualificationInputs">
               <td>
-                <input type="text" [(ngModel)]="newQualification.qualificationName" class="form-control"
-                  placeholder="Qualification Name">
+                <input type="text" [(ngModel)]="newQualification.qualificationName" class="form-control" placeholder="Qualification Name">
               </td>
               <td>
-                <input type="number" [(ngModel)]="newQualification.experience" class="form-control"
-                  placeholder="Experience (years)">
+                <input type="number" [(ngModel)]="newQualification.experience" class="form-control" placeholder="Experience (years)">
               </td>
               <td>
-                <input type="text" [(ngModel)]="newQualification.institution" class="form-control"
-                  placeholder="Institution">
+                <input type="text" [(ngModel)]="newQualification.institution" class="form-control" placeholder="Institution">
               </td>
-
+              <td>
+                <button class="btn btn-success" (click)="updateQualification()">✔</button>
+                <button class="btn btn-danger" (click)="cancelAddQualification()">✖</button>
+              </td>
             </tr>
           </tbody>
         </table>
-        <div>
-
-          <button *ngIf="showQualificationInputs" class="btn addQ" (click)="updateQualification()">Add</button>
-
-          <!-- <div *ngIf="showQualificationInputs" class="qualification-inputs mb-3">
-            <div class="row g-2 align-items-center">
-              <div class="col">
-                <input type="text" 
-                       id="qualificationName" 
-                       [(ngModel)]="newQualification.qualificationName" 
-                       class="form-control" 
-                       placeholder="Qualification Name">
-              </div>
-              <div class="col">
-                <input type="number" 
-                       id="experience" 
-                       [(ngModel)]="newQualification.experience" 
-                       class="form-control" 
-                       placeholder="Experience (years)">
-              </div>
-              <div class="col">
-                <input type="text" 
-                       id="institution" 
-                       [(ngModel)]="newQualification.institution" 
-                       class="form-control" 
-                       placeholder="Institution">
-              </div>
-              <div class="col-auto">
-                <button class="btn btn-primary" (click)="updateQualification()">Add</button>
-              </div>
-            </div>
-          </div> -->
-        </div>
-        <p *ngIf="!userDetails.qualifications || userDetails.qualifications.$values.length === 0">No qualifications
-          found.</p>
+        <p *ngIf="!userDetails.qualifications || userDetails.qualifications.$values.length === 0">No qualifications found.</p>
       </div>
     </div>
   </div>
