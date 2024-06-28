@@ -124,3 +124,71 @@
     margin-bottom: 0;
   }
   
+
+  .add-qualification-container {
+    position: relative;
+    display: inline-block;
+  }
+   
+
+   
+  
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .tooltip .tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    width: 160px;
+    background-color: #ca3b3b;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position the tooltip above the button */
+    left: 80%;
+    margin-left: -70px;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateY(10px);
+    box-shadow: 0px 4px 8px rgba(173, 73, 73, 0.1);
+    font-size: 17px;
+    font-weight: 600;
+  }
+  
+  .tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%; /* Arrow pointing down */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+  }
+  
+  .add-qualification-btn:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .add-qualification-btn {
+    position: relative;
+    background-color:#f7dadca8;
+    border: none;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 8 px;
+    color: #e44c26;
+  }
+  
+  .add-qualification-btn i {
+    margin-right: 8px;
+  }
+  
+ 

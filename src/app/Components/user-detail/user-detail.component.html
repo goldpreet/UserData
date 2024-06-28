@@ -42,10 +42,12 @@
       <div class="add">
         <h4 class="mb-3">Qualifications</h4>
 
-        <button class="btn btn-primary addQ" (click)="toggleAddQualification()" *ngIf="!showQualificationInputs">
-          Add Qualification
-        </button>
-      </div>
+        <div class="tooltip" >
+          <button type="button" class="btn btn-secondary add-qualification-btn" (click)="toggleAddQualification()">+
+            <i class="fas fa-plus"></i>
+            <span class="tooltip-text">Add Qualifiaction</span>
+          </button>
+        </div>
 
       <div class="table">
         <table class="table table-bordered" *ngIf="userDetails.qualifications && userDetails.qualifications.$values.length > 0">
