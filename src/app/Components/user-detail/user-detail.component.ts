@@ -15,7 +15,7 @@ export class UserDetailComponent {
   userDetails: any = {}
   constructor(private route: ActivatedRoute) { }
   userService = inject(UserService)
-  
+
   showQualificationInputs: boolean = false;
   newQualification: any = {
     qualificationName: '',
@@ -27,8 +27,8 @@ export class UserDetailComponent {
     this.route.paramMap.subscribe(params => {
       const guidId = params.get('id');
       console.log('Received guidId:', guidId);
-      this.userService.getUserByid(guidId).subscribe((data) => {
-        console.log(data, "data");
+      this.userService.getUserByid(guidId).subscribe((data:any) => {
+        console.log(data.qualifications, "data");
         this.userDetails = data;
       });
     });
@@ -53,7 +53,7 @@ export class UserDetailComponent {
         institution: this.newQualification.institution
       };
 
-      this.userDetails.qualifications.$values.push(newQualificationEntry);
+      this.userDetails.qualifications.push(newQualificationEntry);
 
       // Prepare the payload
       const payload = {
@@ -65,17 +65,9 @@ export class UserDetailComponent {
         age: this.userDetails.age,
         phone: this.userDetails.phone,
         salary: this.userDetails.salary,
-        qualifications: this.userDetails.qualifications.$values.map((q: any) => {
-          const qualification: any = {
-            qualificationName: q.qualificationName,
-            experience: q.experience,
-            institution: q.institution
-          };
-          if (q.id) {
-            qualification['id'] = q.id;
-          }
-          return qualification;
-        })
+        qualifications: [
+          newQualificationEntry,
+        ]
       };
 
       console.log(this.newQualification, "new");

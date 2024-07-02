@@ -63,8 +63,8 @@ userdata :any=[]
   ngOnInit()
   {
     this.userService.getUserDetails().subscribe((data:any)=>{
-      console.log(data.$values,"data users");
-      this.userdata=data.$values
+      console.log(data,"data users");
+      this.userdata=data
     })
     // getting data from backend part 
   }

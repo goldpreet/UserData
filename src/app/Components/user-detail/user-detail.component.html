@@ -50,7 +50,7 @@
         </div>
 
       <div class="table">
-        <table class="table table-bordered" *ngIf="userDetails.qualifications && userDetails.qualifications.$values.length > 0">
+        <table class="table table-bordered" *ngIf="userDetails?.qualifications && userDetails?.qualifications.length > 0">
           <thead>
             <tr>
               <th>Qualification Name</th>
@@ -60,7 +60,7 @@
           </thead>
           <tbody>
             <!-- Existing qualifications -->
-            <tr *ngFor="let qualification of userDetails.qualifications?.$values">
+            <tr *ngFor="let qualification of userDetails.qualifications">
               <td>{{ qualification.qualificationName }}</td>
               <td>{{ qualification.experience }} years</td>
               <td>{{ qualification.institution }}</td>
@@ -84,7 +84,7 @@
             </tr>
           </tbody>
         </table>
-        <p *ngIf="!userDetails.qualifications || userDetails.qualifications.$values.length === 0">No qualifications found.</p>
+        <p *ngIf="!userDetails.qualifications || userDetails.qualifications.length === 0">No qualifications found.</p>
       </div>
     </div>
   </div>
