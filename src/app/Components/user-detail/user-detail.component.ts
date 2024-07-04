@@ -28,6 +28,7 @@ export class UserDetailComponent {
       const guidId = params.get('id');
       console.log('Received guidId:', guidId);
       this.userService.getUserByid(guidId).subscribe((data:any) => {
+        console.log(data.password, "person");
         console.log(data.qualifications, "data");
         this.userDetails = data;
       });
@@ -65,6 +66,7 @@ export class UserDetailComponent {
         age: this.userDetails.age,
         phone: this.userDetails.phone,
         salary: this.userDetails.salary,
+        password: this.userDetails.password,
         qualifications: [
           newQualificationEntry,
         ]

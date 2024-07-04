@@ -31,6 +31,7 @@ export class FormComponent {
       age: ['', [Validators.required, Validators.min(1), Validators.max(120)]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       salary: ['', [Validators.required, Validators.min(0)]],
+      password: ['', Validators.required],
       qualifications: this.fb.array([]),
     });
   }
@@ -44,6 +45,7 @@ export class FormComponent {
       'age',
       'phone',
       'salary',
+      'password',
     ];
     return initialFields.every((field) => this.userForm.get(field)?.valid);
   }

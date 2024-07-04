@@ -32,6 +32,10 @@ export class UserService {
 
     return this.httpClient.put(`https://localhost:7071/api/Employee/${payload.guidId}`, payload)
   }
+
+  login(payload:any){
+    return this.httpClient.post(`https://localhost:7071/api/login`, payload)
+  }
 }
 
 // get specific data of user
