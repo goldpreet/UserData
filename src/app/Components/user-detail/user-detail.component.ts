@@ -27,7 +27,7 @@ export class UserDetailComponent {
     this.route.paramMap.subscribe(params => {
       const guidId = params.get('id');
       console.log('Received guidId:', guidId);
-      this.userService.getUserByid(guidId).subscribe((data:any) => {
+      this.userService.getUserById(guidId).subscribe((data:any) => {
         console.log(data.password, "person");
         console.log(data.qualifications, "data");
         this.userDetails = data;

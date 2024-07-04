@@ -5,11 +5,14 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-image: linear-gradient( rgba(240, 189, 112, 0.514) ,  rgba(123, 120, 131, 0.781));
   }
+
+
   
   .text-center {
     text-align: center;
-    font-size: 24px;
-    color: #343a40;
+    color: #a12222;
+    font-size: 30px;
+   text-shadow: 1px 1px crimson;
   }
   
   .mb-4 {
@@ -21,7 +24,9 @@
   }
   
   h4 {
-    color: #495057;
+    color: #861717;
+    font-size: 24px;
+   text-shadow: 1px 1px crimson;
   }
   
   .table {

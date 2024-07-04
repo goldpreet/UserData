@@ -3,17 +3,20 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../Services/user.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule,],
+  imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  userService=inject(UserService)
+  userService = inject(UserService);
+  cookieService = inject(CookieService);
+
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
@@ -27,10 +30,16 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-     this.userService.login(this.loginForm.value).subscribe((data)=>{
-      console.log(data,"data");
-      
-     })
+      this.userService.login(this.loginForm.value).subscribe(
+        (response: any) => {
+          const token = `Bearer ${response.token}`;
+          this.cookieService.set('authToken', token, { path: '/' });
+          this.router.navigate(['/user']);
+        },
+        error => {
+          console.error('Login error', error);
+        }
+      );
     }
   }
 }

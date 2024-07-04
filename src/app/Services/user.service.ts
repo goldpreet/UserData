@@ -1,41 +1,47 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  httpClient = inject(HttpClient);
+  cookieService = inject(CookieService);
 
-  constructor() { }
+  constructor() {}
 
-  httpClient = inject(HttpClient)
-
-  addUserDetails(payload: any) {
-    return this.httpClient.post(`https://localhost:7071/api/Employee`, payload)
+  private createAuthorizationHeader(): HttpHeaders {
+    const token = this.cookieService.get('authToken');
+    let headers = new HttpHeaders({'Content-Type': 'application/json'});
+    if (token) {
+      headers = headers.append('Authorization', token);
+    }
+    return headers;
   }
 
-  // add  data of user
-
-  getUserDetails() {
-    return this.httpClient.get("https://localhost:7071/api/Employee")
+  addUserDetails(payload: any): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.httpClient.post(`https://localhost:7071/api/Employee`, payload, { headers });
   }
 
-  // get all data of users
-
-  getUserByid(param: any) {
-    return this.httpClient.get(`https://localhost:7071/api/Employee/${param}`)
+  getUserDetails(): Observable<any[]> {
+    const headers = this.createAuthorizationHeader();
+    return this.httpClient.get<any[]>(`https://localhost:7071/api/Employee`, { headers });
   }
 
-
-  updateUserData(payload: any) {
-    console.log(payload, "payload");
-
-    return this.httpClient.put(`https://localhost:7071/api/Employee/${payload.guidId}`, payload)
+  getUserById(param: any): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.httpClient.get<any>(`https://localhost:7071/api/Employee/${param}`, { headers });
   }
 
-  login(payload:any){
-    return this.httpClient.post(`https://localhost:7071/api/login`, payload)
+  updateUserData(payload: any): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.httpClient.put(`https://localhost:7071/api/Employee/${payload.guidId}`, payload, { headers });
+  }
+
+  login(payload: any): Observable<any> {
+    return this.httpClient.post(`https://localhost:7071/api/login`, payload);
   }
 }
-
-// get specific data of user
