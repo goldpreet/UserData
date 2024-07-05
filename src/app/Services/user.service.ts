@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,13 @@ export class UserService {
       headers = headers.append('Authorization', token);
     }
     return headers;
+    console.log(token);
   }
+  
+  uploadImage(formData: FormData): Observable<any> {
+    console.log('Uploading image...', formData.get('image'));
+    return of({ success: true, message: 'Image uploaded successfully!' });
+};
 
   addUserDetails(payload: any): Observable<any> {
     const headers = this.createAuthorizationHeader();
