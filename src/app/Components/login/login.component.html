@@ -1,5 +1,16 @@
-<div class="login-container">
-  <img src="assets/bg.jpg" alt="Background Image" class="background-image">
+
+
+<!-- <img src="assets/bg-pic.jpg" alt="Bg Image" class="background-image"> -->
+<style>
+  body
+  {
+    color: brown;
+  }
+</style>
+
+<div class="login-container" style="background-image: url(/assets/bg-pic.jpg); background-color: rgb(209, 134, 144);">
+  
+
   <h2>Login</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">

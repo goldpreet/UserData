@@ -196,5 +196,26 @@
   .add-qualification-btn i {
     margin-right: 8px;
   }
+
+  .btn-secondary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .fas {
+    font-size: 1rem;
+    
+  }
+  
+  .btn-secondary .fas.fa-save {
+    color: green;
+  }
+  
+  .btn-secondary .fas.fa-edit {
+    color: blue;
+  }
+  
+
   
  

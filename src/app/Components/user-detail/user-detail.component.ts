@@ -12,9 +12,8 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent {
-  userDetails: any = {}
-  constructor(private route: ActivatedRoute) { }
-  userService = inject(UserService)
+  userDetails: any = {};
+  isEditMode: boolean = false;
 
   showQualificationInputs: boolean = false;
   newQualification: any = {
@@ -23,13 +22,13 @@ export class UserDetailComponent {
     institution: ''
   };
 
+  constructor(private route: ActivatedRoute) { }
+  userService = inject(UserService);
+
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const guidId = params.get('id');
-      console.log('Received guidId:', guidId);
-      this.userService.getUserById(guidId).subscribe((data:any) => {
-        console.log(data.password, "person");
-        console.log(data.qualifications, "data");
+      this.userService.getUserById(guidId).subscribe((data: any) => {
         this.userDetails = data;
       });
     });
@@ -56,28 +55,15 @@ export class UserDetailComponent {
 
       this.userDetails.qualifications.push(newQualificationEntry);
 
-      // Prepare the payload
       const payload = {
-        name: this.userDetails.name,
-        guidId: this.userDetails.guidId,
-        email: this.userDetails.email,
-        status: this.userDetails.status,
-        gender: this.userDetails.gender,
-        age: this.userDetails.age,
-        phone: this.userDetails.phone,
-        salary: this.userDetails.salary,
-        password: this.userDetails.password,
-        qualifications: [
-          newQualificationEntry,
-        ]
+        ...this.userDetails,
+        qualifications: [...this.userDetails.qualifications, newQualificationEntry]
       };
 
-      console.log(this.newQualification, "new");
       this.userService.updateUserData(payload).subscribe(() => {
         console.log("Updated successfully");
       });
 
-      // Reset the form
       this.newQualification = {
         qualificationName: '',
         experience: null,
@@ -87,6 +73,16 @@ export class UserDetailComponent {
       this.showQualificationInputs = false;
     } else {
       alert('Please fill all fields');
+    }
+  }
+
+  toggleEditMode() {
+    this.isEditMode = !this.isEditMode;
+    if (!this.isEditMode) {
+      const payload = { ...this.userDetails };
+      this.userService.updateUserData(payload).subscribe(() => {
+        console.log("User details updated successfully");
+      });
     }
   }
 

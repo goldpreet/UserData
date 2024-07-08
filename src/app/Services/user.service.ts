@@ -49,6 +49,6 @@ export class UserService {
   }
 
   login(payload: any): Observable<any> {
-    return this.httpClient.post(`https://localhost:7071/api/login`, payload);
+    return this.httpClient.post(`https://localhost:7071/api/employee/login`, payload);
   }
 }
